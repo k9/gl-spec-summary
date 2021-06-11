@@ -11,13 +11,14 @@ function getState(): Params {
 }
 
 function setState({ expandedSections }: Params) {
-  window.history.replaceState(
-    null,
-    document.title,
-    `?${new URLSearchParams(
-      expandedSections.map((section) => ["e", section])
-    ).toString()}`
-  );
+  const queryString = new URLSearchParams(
+    expandedSections.map((section) => ["e", section])
+  ).toString();
+
+  const url = new URL(window.location.href);
+  url.search = queryString;
+
+  window.history.replaceState(null, document.title, url.toString());
 }
 
 export const ParamsContext = React.createContext({
