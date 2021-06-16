@@ -5,7 +5,7 @@ export function Section({
 }: {
   id: string;
   heading: any;
-  children: any;
+  children?: any;
 }) {
   return (
     <div className="section">

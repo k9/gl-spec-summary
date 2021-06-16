@@ -1,5 +1,7 @@
 import { SummarizedItem } from "./SummarizedItem";
 import { Section } from "./Section";
+import { InlineSection } from "./InlineSection";
+import { Link } from "./Link";
 
 export function Page() {
   return (
@@ -146,25 +148,121 @@ export function Page() {
         <Section id="4.1" heading="Basic types">
           <p>
             Basic types include bools, ints, and floats; 2, 3 and 4 component
-            vectors of bools, ints, and floats, matrixes, and texture samplers.
-            These types can be aggregated into structs.
+            vectors, matrixes, and texture samplers. These types can be
+            aggregated into structs.
           </p>
-          <ul>
-            <li>
-              <b>Void</b> is used for an empty return type or parameter list.
-            </li>
-            <li>
-              <b>Booleans</b> hold true/false values.
-            </li>
-            <li>
-              <b>Integers</b> are supported at the language level, but hardware
-              may convert them to floats if it doesn't support integers.
-            </li>
-            <li>
-              <b>Integers</b> are supported at the language level, but hardware
-              may convert them to floats if it doesn't support integers.
-            </li>
-          </ul>
+          <InlineSection id="4.1.1">
+            <b>Void</b> is used for an empty return type or parameter list.
+          </InlineSection>
+          <InlineSection id="4.1.2">
+            <b>Booleans</b> hold true/false values.
+          </InlineSection>
+          <InlineSection id="4.1.3">
+            <b>Integers</b> are supported at the language level, but hardware
+            may convert them to floats if it doesn't support integers.
+          </InlineSection>
+          <InlineSection id="4.1.4">
+            <b>Floats</b> are supported. Division by zero is undefined but does
+            not interrupt or terminate processing.
+          </InlineSection>
+          <InlineSection id="4.1.5">
+            <b>Vectors</b> with 2, 3, or 4 components are supported, and can
+            often be mapped to vector operations on the graphics hardware.
+          </InlineSection>
+          <InlineSection id="4.1.6">
+            <b>Matrices</b> with 2x2, 3x3, or 4x4 floating-point elements are
+            supported.
+          </InlineSection>
+          <InlineSection id="4.1.7">
+            <b>Samplers</b> are handles to textures. They are passed into
+            texture functions to identify a texture.
+          </InlineSection>
+          <InlineSection id="4.1.8">
+            <b>Structures</b> aggregate existing types into user-defined types.
+          </InlineSection>
+          <InlineSection id="4.1.9">
+            <b>Arrays</b> of constant size are supported.
+          </InlineSection>
+        </Section>
+        <Section id="4.2" heading="Scoping">
+          <p>GLSL uses statically-nested scopes.</p>
+          <Section id="4.2.1" heading="Definition of terms">
+            A 'scope' is the region of a shader where a variable is visible.
+          </Section>
+          <Section id="4.2.2" heading="Types of scope">
+            In addition to the global scope, functions and if/else statements
+            etc. create nested scopes.
+          </Section>
+          <Section id="4.2.3" heading="Redeclaring variables">
+            Variables with the same name can be redeclared within nested scopes.
+            Redeclared variables use separate storage from the overriden
+            variable.
+          </Section>
+          <Section id="4.2.4" heading="Shared globals">
+            Uniforms are shared globals that can be accessed across compilation
+            units.
+          </Section>
+          <Section id="4.2.5" heading="Global scope">
+            Built-in functions are defined in the outermost scope, and the
+            global scope is nested within that outermost scope. User-defined
+            functions are defined within the global scope.
+          </Section>
+          <Section id="4.2.6" heading="Name spaces and hiding">
+            Each scope has a name space for variable and function names.
+            Declaring a variable or function in an inner scope hides any
+            declaration with this the same name in outer scopes. Functions can
+            only be declared in the global scope, not nested scopes.
+          </Section>
+          <Section
+            id="4.2.7"
+            heading="Redeclarations and Redefinitions Within the Same Scope"
+          >
+            Redeclaring variables, functions, or structs in a scope is not
+            allowed, except that overloaded functions with different signatures
+            can share the same name, and a function declaration like{" "}
+            <code>void f(int);</code> can be followed by a function declaration
+            like <code>void f(int) {"{}"}</code>.
+          </Section>
+        </Section>
+        <Section id="4.3" heading="Storage Qualifiers">
+          Variables can specify a storage qualifier before their type. The
+          qualifiers are <b>const</b>, <b>attribute</b>, <b>uniform</b>, and{" "}
+          <b>varying</b>.
+          <Section id="4.3.1" heading="Default Storage Qualifier">
+            By default a variable will allocate read/write memory with no link
+            to the application or other processors.
+          </Section>
+          <Section id="4.3.2" heading="Constant Qualifier">
+            The <b>const</b> qualifier makes a variable read-only, and const
+            variables must be initialized with constant expressions.
+          </Section>
+          <Section id="4.3.3" heading="Attribute">
+            The <b>attribute</b> is used for variables passed to a vertex shader
+            on a per-vertex basis. Implementations will have a limit on the
+            number of attributes a shader can access.
+          </Section>
+          <Section id="4.3.4" heading="Uniform">
+            The <b>uniform</b> qualifier is used for global variables whose
+            values are the same across the entire primitive Implementations will
+            have a limit on the number of uniforms a shader can access.
+          </Section>
+          <Section id="4.3.5" heading="Varying">
+            The <b>varying</b> qualifier is used for variables that vertex
+            shaders write to per-vertex and fragment shaders read from. The
+            fragment shader receives an interpolated value over the primitive
+            being rendered.
+          </Section>
+        </Section>
+        <Section id="4.4" heading="Parameter Qualifiers">
+          Function parameters can be marked as <b>in</b> for parameters passed
+          into a function, <b>out</b> for parameters passed out, or <b>inout</b>{" "}
+          for parameters passed both into and out.{" "}
+          <Link id="6.1.1">See 6.1.1</Link>
+        </Section>
+        <Section id="4.5" heading="Precision and Precision Qualifiers">
+          <Section id="4.5.1" heading="Range and Precision">
+            
+        </Section>
         </Section>
       </SummarizedItem>
     </>
