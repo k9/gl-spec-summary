@@ -261,8 +261,61 @@ export function Page() {
         </Section>
         <Section id="4.5" heading="Precision and Precision Qualifiers">
           <Section id="4.5.1" heading="Range and Precision">
-            
+            Minimum ranges and levels of precision are specified for vertex
+            shaders, and separate minimums for fragment shaders. Implementations
+            may provide more range or precision.
+          </Section>
+          <Section id="4.5.2" heading="Precision Qualifiers">
+            Integer and float declarations can specify <code>highp</code>,
+            <code>mediump</code>, and <code>lowp</code> precision qualifiers
+            which result in high, medium, or low precision ints and floats.
+          </Section>
+          <Section id="4.5.3" heading="Default Precision Qualifiers">
+            The default precision for ints or floats in a given scope can be set
+            with a statement like <code>precision highp float</code>. Global
+            default precisions are defined for vertex and fragment shaders,
+            except for floats in fragment shaders, for which a precision must be
+            set by the shader code.
+          </Section>
+          <Section id="4.5.4" heading="Available Precision Qualifiers">
+            Fragment shader support for <code>highp</code> is optional, and if
+            it is supported <code>GL_FRAGMENT_PRECISION_HIGH</code> will be
+            equal to <code>1</code>.
+          </Section>
         </Section>
+        <Section id="4.6" heading="Variance and the Invariant Qualifier">
+          By default, optimizations may cause the values of varyings and special
+          variables like <code>gl_Position</code> to be different across
+          different shaders even though the same code was used to calculate
+          them. Variables can be declared to be <b>invariant</b> in order to
+          prevent this.
+          <Section id="4.6.1" heading="The Invariant Qualifier">
+            The invariant qualifier can be applied to existing special variables
+            or varyings, or specified while declaring varyings. This can only be
+            done in the global scope. For debugging, an invariant pragma exists
+            to set all relevant variables to be invariant.
+          </Section>
+          <Section id="4.6.2" heading="Invariance within Shaders">
+            An unchanged variable may have different values within a shader
+            since the compiler may choose to recalculate it rather than store
+            the value. To prevent this type of invariance, use invariance
+            qualifiers or the invariance pragma.
+          </Section>
+          <Section id="4.6.3" heading="Invariance of Constant Expressions">
+            Invariance for constant expressions is guaranteed, as long as the
+            expressions are the same and the same precision is used.
+          </Section>
+          <Section id="4.6.4" heading="Invariance and Linkage">
+            The invariance of varyings declared in both the vertex and fragment
+            shaders must match. Invariance of some special variables must match
+            invariance of other special variables.
+          </Section>
+        </Section>
+        <Section id="4.7" heading="Order of Qualification">
+          Qualifiers must be in the following order{" "}
+          <code>invariant-qualifier storage-qualifier precision-qualifier</code>{" "}
+          or
+          <code>storage-qualifier parameter-qualifier precision-qualifier</code>
         </Section>
       </SummarizedItem>
     </>
