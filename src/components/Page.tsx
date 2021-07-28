@@ -318,6 +318,88 @@ export function Page() {
           <code>storage-qualifier parameter-qualifier precision-qualifier</code>
         </Section>
       </SummarizedItem>
+      <SummarizedItem
+        id="5"
+        heading="Operators and expressions"
+        summary={<></>}
+      >
+        <Section id="5.1" heading="Operators">
+          The Shading Language includes many operators, but not address-of,
+          dereference, or typecast operators.
+        </Section>
+        <Section id="5.2" heading="Array Subscripting">
+          <code>[]</code> accesses array elements, and is the only operator on
+          arrays.
+        </Section>
+        <Section id="5.3" heading="Function Calls">
+          <code>()</code> calls functions.
+        </Section>
+        <Section id="5.4" heading="Constructors">
+          <code>()</code> also calls constructors, to create basic types like{" "}
+          <code>float</code> or <code>vec3</code> or custom structures.
+          <Section id="5.4.1" heading="Conversion and Scalar Constructors">
+            Scalar constructors like <code>int</code> convert scalar arguments,
+            for example
+            <code>int(1.1)</code> equals <code>1</code>. Scalar constructors
+            also select the first element from a non-scalar, so{" "}
+            <code>float(vec3(1.1, 2.2, 3.3))</code> equals <code>1.1</code>.
+          </Section>
+          <Section id="5.4.2" heading="Vector and Matrix Constructors">
+            <p>
+              Vectors can be constructed with a single scalar parameter, which
+              will be used to initialize all elements of the vector. Or a vector
+              can be constructed with multiple scalars or vectors, which will be
+              consumed from left to right. For example a <code>vec4</code>
+              can be constructed with a <code>float</code> and a{" "}
+              <code>vec3</code> as arguments.
+            </p>
+            <p>
+              Matrices can be constructed with a single scalar parameter, which
+              will be used to initialize the diagonal elements of the matrix,
+              with all other elements being set to 0. Or a matrix can be
+              constructed with multiple scalars and vectors, which will be
+              consumed in column-major order.
+            </p>
+            <p>
+              Parameters to vector and matrix constructors are converted if
+              their basic type doesn't match the type of the vector or matrix.
+            </p>
+          </Section>
+          <Section id="5.4.3" heading="Structure Constructors">
+            Structures can be constructed by calling their constructor with
+            arguments of the same type and order as the structure.
+          </Section>
+        </Section>
+        <Section id="5.5" heading="Vector Components">
+          <p>
+            Vector components can be accessed or set using a combination of up
+            to 4 letters from one of these sets: <code>x, y, z, w</code> or{" "}
+            <code>r, g, b, a</code> or <code>s, t, p, q</code>. For example{" "}
+            <code>ivec3(1, 2, 3).yx</code> equals <code>ivec2(2, 1)</code>.
+            Letters from different sets can't be combined.
+          </p>
+          <p>
+            Vector components can also be accessed or set using array
+            subscripts.
+          </p>
+        </Section>
+        <Section id="5.6" heading="Matrix Components">
+          The subscript operator on a matrix returns a vector of the values in
+          that column, for example <code>mat2(9.0, 8.0, 7.0, 6.0)[1]</code> is{" "}
+          <code>vec2(7.0, 6.0)</code>. A second subscript selects an element of
+          the column vector.
+        </Section>
+        <Section id="5.7" heading="Structures and Fields">
+          Structures support the field selector <code>s.x</code>, equality{" "}
+          <code>s1 == s2</code>, and assignment <code>s1 = s2</code> operators.
+        </Section>
+        <Section id="5.8" heading="Assignments">
+          Assignment to variables, structures, fields, and array subscripts can
+          be achieved using <code>=</code>, <code>+=</code>, etc. Some operators
+          like <code>%=</code> are reserved for future use.
+        </Section>
+        <Section id="5.9" heading="Assignments"></Section>
+      </SummarizedItem>
     </>
   );
 }

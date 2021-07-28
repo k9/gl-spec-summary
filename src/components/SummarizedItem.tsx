@@ -23,7 +23,7 @@ export function SummarizedItem({
   id: string;
   heading: any;
   summary: any;
-  children: any;
+  children?: any;
 }) {
   const { params, setParams } = useContext(ParamsContext);
   const expanded = params.expandedSections.includes(id);
